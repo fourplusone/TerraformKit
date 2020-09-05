@@ -1,6 +1,10 @@
 import Foundation
 import Dispatch
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 public struct VersionDescription {
     var name: String
     var version: String
