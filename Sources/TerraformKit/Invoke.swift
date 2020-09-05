@@ -1,8 +1,6 @@
 #if canImport(Darwin) && os(macOS)
-
 import CoreFoundation
 import Foundation
-import Dispatch
 
 private func emptyRunLoopCallback(_ context : UnsafeMutableRawPointer?) -> Void {}
 
@@ -509,6 +507,8 @@ extension Terraform {
 }
 
 #else
+import Foundation
+
 
 extension Terraform {
     func invoke(arguments: [String],
@@ -528,6 +528,5 @@ extension Terraform {
         p.waitUntilExit()
     }
 }
-
 
 #endif
