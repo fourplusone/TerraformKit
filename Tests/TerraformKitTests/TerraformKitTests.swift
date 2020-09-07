@@ -9,7 +9,7 @@ final class TerraformKitTests: XCTestCase {
     }
     
     override func tearDown() {
-        try! terraform.destroy()
+        terraform.cleanup()
     }
     
     func testVersion() {

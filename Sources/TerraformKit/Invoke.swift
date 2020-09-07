@@ -381,7 +381,8 @@ class WrappedProcess {
             adddup2[STDIN_FILENO] = try devNullFd()
             
         // No need to dup stdin to stdin
-        case let handle as FileHandle where handle === FileHandle.standardInput: break
+        // TODO: Figure out, why on macOS stdin needs to be dup'ed to work correctly
+        // case let handle as FileHandle where handle === FileHandle.standardInput: break
             
         case let handle as FileHandle:
             adddup2[STDIN_FILENO] = handle.fileDescriptor
@@ -400,7 +401,8 @@ class WrappedProcess {
             adddup2[STDOUT_FILENO] = try devNullFd()
             
         // No need to dup stdout to stdout
-        case let handle as FileHandle where handle === FileHandle.standardOutput: break
+        // TODO: Figure out, why on macOS stdout needs to be dup'ed to work correctly
+        // case let handle as FileHandle where handle === FileHandle.standardOutput: break
             
         case let handle as FileHandle:
             adddup2[STDOUT_FILENO] = handle.fileDescriptor
@@ -419,7 +421,8 @@ class WrappedProcess {
             adddup2[STDERR_FILENO] = try devNullFd()
             
         // No need to dup stderr to stderr
-        case let handle as FileHandle where handle === FileHandle.standardError: break
+        // TODO: Figure out, why on macOS stderr needs to be dup'ed to work correctly
+        // case let handle as FileHandle where handle === FileHandle.standardError: break
             
         case let handle as FileHandle:
             adddup2[STDERR_FILENO] = handle.fileDescriptor
@@ -498,30 +501,20 @@ class WrappedProcess {
     }
 }
 
-extension Terraform {
-    func invoke(arguments: [String],
-                stdin: Any = FileHandle.standardInput,
-                stdout: Any = FileHandle.standardOutput,
-                stderr: Any = FileHandle.standardError) throws {
-        
-        let p = Process()
-        p.executableURL = terraformExecutable
-        p.arguments = arguments
-        p.currentDirectoryURL = workingDirectoryURL
-        p.standardInput = stdin
-        p.standardOutput = stdout
-        p.standardError = stderr
-        
-        let task = WrappedProcess(p: p)
-        
-        try task.run()
-        task.waitUntilExit()
-    }
+func runProcessAndWaitForTermination(_ process: Process) throws {
+    let wrapped = WrappedProcess.init(p: process)
+    try wrapped.run()
+    wrapped.waitUntilExit()
 }
 
 #else
-import Foundation
 
+func runProcessAndWaitForTermination(_ process: Process) throws {
+    try process.run()
+    process.waitUntilExit()
+}
+
+#endif
 
 extension Terraform {
     func invoke(arguments: [String],
@@ -536,10 +529,12 @@ extension Terraform {
         p.standardInput = stdin
         p.standardOutput = stdout
         p.standardError = stderr
+        
+        var env = ProcessInfo.processInfo.environment
+        env.updateValue(terraformExecutable.deletingLastPathComponent().path, forKey: "TF_PLUGIN_CACHE_DIR")
+        p.environment = env
         
         try p.run()
         p.waitUntilExit()
     }
 }
-
-#endif

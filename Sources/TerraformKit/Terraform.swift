@@ -5,11 +5,14 @@ import Dispatch
 import FoundationNetworking
 #endif
 
+/// Description of a Terraform version including all configured providers
 public struct VersionDescription {
-    var name: String
-    var version: String
-    
-    var submodules: [VersionDescription] = []
+    let version: String
+    let providers: [String: ProviderVersionDescription]
+}
+
+public struct ProviderVersionDescription {
+    let version: String
 }
 
 @_implementationOnly import ZIPFoundation
@@ -22,7 +25,9 @@ public class Terraform {
     let usingWorkingDirectory: Bool
     let terraformExecutable: URL
     
-    
+    public enum TerraformError : Error {
+        case unexpectedOutput
+    }
     
     private static func download(version: String, arch: String) throws {
         let fm = FileManager.default
@@ -121,17 +126,35 @@ public class Terraform {
         return terraformBinary
     }
         
-    public init?(configuration: AnyEncodable? = nil, workingDirectoryURL : URL? = nil, version : String = Terraform.defaultTerraformVersion) {
-        guard let tfExecutable = Terraform.downloadIfNeeded(version: version) else { return nil }
-        terraformExecutable = tfExecutable
+    
+    /// Configure a new Terraform environment. Terraform will be downloaded if necessary.
+    /// - Parameters:
+    ///   - configuration: An Encodable to be used as Terraform configuration. This object will be
+    ///   encoded using the JSON decoder and saved to a file called main.tf.json
+    ///   - workingDirectoryURL: URL of Terraforms working directory. If left empty, a temporary
+    ///   directory will be created
+    ///   - version: The version of Terraform to be used
+    public init?(
+        configuration: AnyEncodable? = nil,
+        workingDirectoryURL : URL? = nil,
+        version : String = Terraform.defaultTerraformVersion,
+        terraformExecutable: URL? = nil
+    ) {
         
-        let temporaryDir = URL(fileURLWithPath: NSTemporaryDirectory())
+        if let tfExecutable = terraformExecutable {
+            self.terraformExecutable = tfExecutable
+        } else {
+            guard let tfExecutable = Terraform.downloadIfNeeded(version: version) else { return nil }
+            self.terraformExecutable = tfExecutable
+        }
+        
         
         switch workingDirectoryURL {
         case .some(let url ):
             usingWorkingDirectory = false
             self.workingDirectoryURL = url
         case .none:
+            let temporaryDir = URL(fileURLWithPath: NSTemporaryDirectory())
             usingWorkingDirectory = true
             self.workingDirectoryURL = temporaryDir.appendingPathComponent(UUID.init().uuidString)
         }
@@ -151,27 +174,35 @@ public class Terraform {
         }
     }
     
+    /// Remove the temporary working directory of terraform. Calling this function is not allowed, if a
+    /// working directory was specified in the initializer
     public func cleanup() {
         precondition(usingWorkingDirectory, "Only a temporary working directory can be cleaned up automatically")
         try! FileManager.default.removeItem(at: workingDirectoryURL)
     }
     
+    /// Run `terraform init`
     public func initialize() throws {
         try invoke(arguments: ["init", workingDirectoryURL.path])
     }
     
+    /// Run `terraform plan`
     public func plan() throws {
         try invoke(arguments: ["plan", workingDirectoryURL.path])
     }
     
+    /// Run `terraform apply`
     public func apply() throws {
         try invoke(arguments: ["apply", workingDirectoryURL.path])
     }
     
+    /// Run `terraform destroy`
     public func destroy() throws {
         try invoke(arguments: ["destroy", workingDirectoryURL.path])
     }
     
+    /// Fetch the current provider schema
+    /// - Returns: The schema description
     public func schema() throws -> SchemaDescription {
         let outPipe = Pipe()
         var buffer = Data()
@@ -188,6 +219,9 @@ public class Terraform {
         return try! jsonDecoder.decode(SchemaDescription.self, from:buffer)
     }
     
+    
+    /// Determine the currenly used version of terraform and the versions of all installed providers
+    /// - Returns: The current version of terraform and all configured providers
     public func version() throws -> VersionDescription {
         let outPipe = Pipe()
         var buffer = Data()
@@ -202,22 +236,21 @@ public class Terraform {
         
         let lines = output.split(separator: "\n")
         
-        var versionDescription = VersionDescription(name: "Terraform", version: "")
+        var terraformVersion : String?
+        var providerDescriptions : [String : ProviderVersionDescription] = [:]
         
         for line in lines {
             if line.starts(with: "Terraform") {
-                versionDescription.version = String(line.split(separator: " ")[1].dropFirst())
+                terraformVersion = String(line.split(separator: " ")[1].dropFirst())
             }
             if line.starts(with: "+") {
                 let components = line.split(separator: " ")
-                
-                versionDescription.submodules.append(
-                    VersionDescription(name: String(components[1]),
-                                       version: String(components[2].dropFirst()))
-                )
+                providerDescriptions[String(components[1])] = ProviderVersionDescription(version: String(components[2].dropFirst()))
             }
         }
         
-        return versionDescription
+        guard terraformVersion != nil else { throw TerraformError.unexpectedOutput }
+        
+        return VersionDescription(version: terraformVersion!, providers: providerDescriptions)
     }
 }
