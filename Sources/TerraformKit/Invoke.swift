@@ -1,3 +1,5 @@
+import Foundation
+
 #if canImport(Darwin) && os(macOS)
 // This source file is part of the Swift.org open source project
 //
@@ -13,7 +15,6 @@
 // is used to spawn a process on macOS
 
 import CoreFoundation
-import Foundation
 
 private func emptyRunLoopCallback(_ context : UnsafeMutableRawPointer?) -> Void {}
 
