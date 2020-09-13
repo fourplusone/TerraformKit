@@ -289,10 +289,6 @@ class WrappedProcess {
         let socket = CFSocketCreateWithNative( nil, taskSocketPair[0], CFOptionFlags(3), {
             (socket, type, address, data, info )  in
             
-//            let p = info?.assumingMemoryBound(to: WrappedProcess.self)
-//            let process = p.unsafelyUnwrapped.pointee
-            
-            
             
             let process: WrappedProcess = Unmanaged.fromOpaque(info!).takeUnretainedValue()
             
@@ -535,7 +531,6 @@ extension Terraform {
         env.updateValue(terraformExecutable.deletingLastPathComponent().path, forKey: "TF_PLUGIN_CACHE_DIR")
         p.environment = env
         
-        try p.run()
-        p.waitUntilExit()
+        try runProcessAndWaitForTermination(p)
     }
 }

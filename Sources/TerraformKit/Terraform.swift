@@ -22,7 +22,7 @@ public class Terraform {
     
     public static let defaultTerraformVersion = "0.13.2"
     let workingDirectoryURL : URL
-    let usingWorkingDirectory: Bool
+    let usingTemporaryWorkingDirectory: Bool
     let terraformExecutable: URL
     
     public enum TerraformError : Error {
@@ -88,9 +88,9 @@ public class Terraform {
     static private func terraformBinaryURL(version: String, arch: String) -> URL {
         let fm = FileManager.default
         return try! fm.url(for: .cachesDirectory,
-                                 in: .userDomainMask,
-                                 appropriateFor: nil,
-                                 create:false)
+                           in: .userDomainMask,
+                           appropriateFor: nil,
+                           create:false)
             .appendingPathComponent("TerraformKit")
             .appendingPathComponent(terraformBinaryName(version: version, arch: arch))
         
@@ -99,15 +99,15 @@ public class Terraform {
     static func downloadIfNeeded(version: String) -> URL? {
         
         #if arch(x86_64)
-            #if os(Linux)
-            let arch = "linux_amd64"
-            #elseif os(macOS)
-            let arch = "darwin_amd64"
-            #elseif os(Windows)
-            let arch = "windows_amd64"
-            #endif
+        #if os(Linux)
+        let arch = "linux_amd64"
+        #elseif os(macOS)
+        let arch = "darwin_amd64"
+        #elseif os(Windows)
+        let arch = "windows_amd64"
+        #endif
         #else
-            #error("Architecture / OS is not supported")
+        #error("Architecture / OS is not supported")
         #endif
         
         
@@ -125,7 +125,7 @@ public class Terraform {
         
         return terraformBinary
     }
-        
+    
     
     /// Configure a new Terraform environment. Terraform will be downloaded if necessary.
     /// - Parameters:
@@ -150,24 +150,26 @@ public class Terraform {
         
         
         switch workingDirectoryURL {
-        case .some(let url ):
-            usingWorkingDirectory = false
+        case .some(let url):
+            usingTemporaryWorkingDirectory = false
             self.workingDirectoryURL = url
         case .none:
             let temporaryDir = URL(fileURLWithPath: NSTemporaryDirectory())
-            usingWorkingDirectory = true
+            usingTemporaryWorkingDirectory = true
             self.workingDirectoryURL = temporaryDir.appendingPathComponent(UUID.init().uuidString)
         }
         
         do {
-            try FileManager.default.createDirectory(at:self.workingDirectoryURL, withIntermediateDirectories:false)
+            if usingTemporaryWorkingDirectory {
+                try FileManager.default.createDirectory(at:self.workingDirectoryURL,
+                                                        withIntermediateDirectories:false)
+            }
             
             if let configuration = configuration {
                 let encoder = JSONEncoder()
                 let encoded = try encoder.encode(configuration)
                 try encoded.write(to: self.workingDirectoryURL.appendingPathComponent("main.tf.json"))
             }
-            
             
         } catch _ {
             return nil
@@ -177,7 +179,7 @@ public class Terraform {
     /// Remove the temporary working directory of terraform. Calling this function is not allowed, if a
     /// working directory was specified in the initializer
     public func cleanup() {
-        precondition(usingWorkingDirectory, "Only a temporary working directory can be cleaned up automatically")
+        precondition(usingTemporaryWorkingDirectory, "Only a temporary working directory can be cleaned up automatically")
         try! FileManager.default.removeItem(at: workingDirectoryURL)
     }
     
