@@ -4,3 +4,5 @@
 /*.xcodeproj
 xcuserdata/
 .swiftpm/xcode/package.xcworkspace
+.terraform
+docs

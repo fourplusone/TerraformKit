@@ -125,6 +125,7 @@ class WrappedProcess {
     var processIdentifier: pid_t = pid_t()
     private var processLaunchedCondition = NSCondition()
     private var _terminationStatus: Int32 = 0
+    public var terminationStatus : Int32 { get { _terminationStatus } }
     private var _terminationReason: Process.TerminationReason = .exit
     
 
@@ -498,17 +499,21 @@ class WrappedProcess {
     }
 }
 
-func runProcessAndWaitForTermination(_ process: Process) throws {
+@discardableResult
+func runProcessAndWaitForTermination(_ process: Process) throws -> Int32 {
     let wrapped = WrappedProcess.init(p: process)
     try wrapped.run()
     wrapped.waitUntilExit()
+    return wrapped.terminationStatus
 }
 
 #else
 
-func runProcessAndWaitForTermination(_ process: Process) throws {
+@discardableResult
+func runProcessAndWaitForTermination(_ process: Process) throws -> Int32 {
     try process.run()
     process.waitUntilExit()
+    return process.terminationStatus
 }
 
 #endif

@@ -17,7 +17,6 @@ public struct ProviderVersionDescription {
 
 @_implementationOnly import ZIPFoundation
 
-
 public class Terraform {
     
     public static let defaultTerraformVersion = "0.13.2"
@@ -189,13 +188,41 @@ public class Terraform {
     }
     
     /// Run `terraform plan`
-    public func plan() throws {
-        try invoke(arguments: ["plan", workingDirectoryURL.path])
+    public func plan() throws -> Plan {
+        try withTemporaryFile { (planFile) -> Plan in
+            try invoke(arguments: ["plan", workingDirectoryURL.path, "-out", planFile.path])
+            
+            let outPipe = Pipe()
+            var buffer = Data()
+            outPipe.fileHandleForReading.readabilityHandler = { handle in
+                buffer.append(handle.availableData)
+            }
+            
+            try invoke(arguments: ["show", "-json", planFile.path], stdout:outPipe)
+            outPipe.fileHandleForReading.closeFile()
+            
+            let decoder = TerraformDecoder()
+            return try decoder.decode(Plan.self, from: buffer)
+        }
+    }
+    
+    public func state() throws -> State {
+        let outPipe = Pipe()
+        var buffer = Data()
+        outPipe.fileHandleForReading.readabilityHandler = { handle in
+            buffer.append(handle.availableData)
+        }
+        
+        try invoke(arguments: ["show", "-json"], stdout:outPipe)
+        outPipe.fileHandleForReading.closeFile()
+        
+        let decoder = TerraformDecoder()
+        return try decoder.decode(State.self, from: buffer)
     }
     
     /// Run `terraform apply`
     public func apply() throws {
-        try invoke(arguments: ["apply", workingDirectoryURL.path])
+        try invoke(arguments: ["apply", "-auto-approve", "-input=false" , workingDirectoryURL.path])
     }
     
     /// Run `terraform destroy`
@@ -215,12 +242,10 @@ public class Terraform {
         try invoke(arguments: ["providers", "schema", "-json"], stdout:outPipe)
         outPipe.fileHandleForReading.closeFile()
         
-        let jsonDecoder = JSONDecoder()
-        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        let decoder = TerraformDecoder()
         
-        return try! jsonDecoder.decode(SchemaDescription.self, from:buffer)
+        return try! decoder.decode(SchemaDescription.self, from:buffer)
     }
-    
     
     /// Determine the currenly used version of terraform and the versions of all installed providers
     /// - Returns: The current version of terraform and all configured providers
