@@ -14,10 +14,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        submodules: true 
-    - name: Build
-      uses: Didstopia/SwiftAction@v1.0.2
-    - name: Test
-      uses: Didstopia/SwiftAction@v1.0.2
+        submodules: true
+    - uses: fwal/setup-swift@v1
       with:
-        swift-action: test
+        swift-version: "5.2"
+    - name: Build
+      run: swift build
+    - name: Test
+      run: swift test --enable-test-discovery

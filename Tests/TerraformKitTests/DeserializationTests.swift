@@ -17,8 +17,4 @@ final class DeserializationTests: XCTestCase {
     func testEmptyPlan() {
         XCTAssertNoThrow(try decoder.decode(Plan.self, from: empty_plan))
     }
-
-    static var allTests = [
-        ("testPlan", testPlan),
-    ]
 }

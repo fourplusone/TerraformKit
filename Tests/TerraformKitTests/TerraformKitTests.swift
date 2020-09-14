@@ -15,8 +15,4 @@ final class TerraformKitTests: XCTestCase {
     func testVersion() {
         XCTAssertEqual(try! terraform.version().version, Terraform.defaultTerraformVersion)
     }
-
-    static var allTests = [
-        ("testVersion", testVersion),
-    ]
 }
