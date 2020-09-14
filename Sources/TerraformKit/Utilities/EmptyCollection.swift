@@ -19,24 +19,39 @@ extension KeyedDecodingContainer {
         try decodeIfPresent(type, forKey: key) ?? .init()
     }
     
-    func decode(_ type: [Configuration.ResourceConfiguration].Type,
-                forKey key: Key) throws -> [Configuration.ResourceConfiguration] {
+    func decode(_ type: [Plan.Configuration.ResourceConfiguration].Type,
+                forKey key: Key) throws -> [Plan.Configuration.ResourceConfiguration] {
         try decodeIfPresent(type, forKey: key) ?? .init()
     }
     
     
-    func decode(_ type: [String: Configuration.ProviderConfig].Type,
-                forKey key: Key) throws -> [String: Configuration.ProviderConfig] {
+    func decode(_ type: [String: Plan.Configuration.ProviderConfig].Type,
+                forKey key: Key) throws -> [String: Plan.Configuration.ProviderConfig] {
         try decodeIfPresent(type, forKey: key) ?? .init()
     }
     
-    func decode(_ type: [String: Configuration.ModuleConfiguration.Property].Type,
-                forKey key: Key) throws -> [String: Configuration.ModuleConfiguration.Property] {
+    func decode(_ type: [String: Plan.Configuration.ModuleConfiguration.Property].Type,
+                forKey key: Key) throws -> [String: Plan.Configuration.ModuleConfiguration.Property] {
         try decodeIfPresent(type, forKey: key) ?? .init()
     }
     
-    func decode(_ type: [String: Configuration.ModuleCall].Type,
-                forKey key: Key) throws -> [String: Configuration.ModuleCall] {
+    func decode(_ type: [String: Plan.Configuration.ModuleCall].Type,
+                forKey key: Key) throws -> [String: Plan.Configuration.ModuleCall] {
+        try decodeIfPresent(type, forKey: key) ?? .init()
+    }
+    
+    func decode(_ type: [String: Plan.Variable].Type,
+                forKey key: Key) throws -> [String: Plan.Variable] {
+        try decodeIfPresent(type, forKey: key) ?? .init()
+    }
+    
+    func decode(_ type: [Plan.ResourceChange].Type,
+                forKey key: Key) throws -> [Plan.ResourceChange] {
+        try decodeIfPresent(type, forKey: key) ?? .init()
+    }
+    
+    func decode(_ type: [String: Plan.OutputChange].Type,
+                forKey key: Key) throws -> [String: Plan.OutputChange] {
         try decodeIfPresent(type, forKey: key) ?? .init()
     }
 }

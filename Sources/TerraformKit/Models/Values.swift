@@ -59,7 +59,10 @@ public struct Module : Decodable {
 
 }
 
+/// A values representation is used in both state and plan output to describe current state (which is always
+/// complete) and planned state (which omits values not known until apply).
 public struct Values : Decodable {
+    
     /// `outputs` describes the outputs from the root module. Outputs from
     /// descendent modules are not available because they are not retained in all
     /// of the underlying structures we will build this values representation from.

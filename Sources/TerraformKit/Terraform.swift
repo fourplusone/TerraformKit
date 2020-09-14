@@ -7,16 +7,27 @@ import FoundationNetworking
 
 /// Description of a Terraform version including all configured providers
 public struct VersionDescription {
-    let version: String
-    let providers: [String: ProviderVersionDescription]
+    /// Terraform Version
+    public let version: String
+    
+    /// Dictionary containing all provider versions. The key refers to the provider name
+    public let providers: [String: ProviderVersionDescription]
+    
+    /// Description of a provider version
+    public struct ProviderVersionDescription {
+        /// Provider version
+        public let version: String
+    }
 }
 
-public struct ProviderVersionDescription {
-    let version: String
-}
+
 
 @_implementationOnly import ZIPFoundation
 
+/// A `Terraform` object is a wrapper around the terraform executable. It can be used to perform common
+/// operations like planning and applying changes, retrieving provider schemas and retrieving versions
+///
+/// This class is the only object to be instanciated directly by the user.
 public class Terraform {
     
     public static let defaultTerraformVersion = "0.13.2"
@@ -202,7 +213,11 @@ public class Terraform {
             outPipe.fileHandleForReading.closeFile()
             
             let decoder = TerraformDecoder()
-            return try decoder.decode(Plan.self, from: buffer)
+            
+            var plan = try decoder.decode(Plan.self, from: buffer)
+            plan.source = try Data(contentsOf: planFile.url)
+            
+            return plan
         }
     }
     
@@ -221,7 +236,8 @@ public class Terraform {
     }
     
     /// Run `terraform apply`
-    public func apply() throws {
+    /// - Parameter plan: The plan to execute
+    public func apply(plan: Plan) throws {
         try invoke(arguments: ["apply", "-auto-approve", "-input=false" , workingDirectoryURL.path])
     }
     
@@ -264,7 +280,7 @@ public class Terraform {
         let lines = output.split(separator: "\n")
         
         var terraformVersion : String?
-        var providerDescriptions : [String : ProviderVersionDescription] = [:]
+        var providerDescriptions : [String : VersionDescription.ProviderVersionDescription] = [:]
         
         for line in lines {
             if line.starts(with: "Terraform") {
@@ -272,7 +288,7 @@ public class Terraform {
             }
             if line.starts(with: "+") {
                 let components = line.split(separator: " ")
-                providerDescriptions[String(components[1])] = ProviderVersionDescription(version: String(components[2].dropFirst()))
+                providerDescriptions[String(components[1])] = VersionDescription.ProviderVersionDescription(version: String(components[2].dropFirst()))
             }
         }
         
