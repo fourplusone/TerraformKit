@@ -1,6 +1,6 @@
 import Foundation
 
-public indirect enum Type : Equatable {
+public indirect enum Type : Hashable {
     case string
     case number
     case bool
