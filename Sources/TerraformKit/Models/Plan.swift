@@ -244,7 +244,7 @@ public struct Plan : Decodable {
         /// after values are identical. The "after" value will be incomplete if there
         /// are values within it that won't be known until after apply.
         public let before: Values?
-        public let after: Values
+        public let after: Values?
     }
     
     public struct ResourceChange : Decodable {
