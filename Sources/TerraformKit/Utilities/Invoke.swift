@@ -518,19 +518,71 @@ func runProcessAndWaitForTermination(_ process: Process) throws -> Int32 {
 
 #endif
 
+
 extension Terraform {
-    func invoke(arguments: [String],
-                stdin: Any = FileHandle.standardInput,
-                stdout: Any = FileHandle.standardOutput,
-                stderr: Any = FileHandle.standardError) throws {
+    func invoke(arguments: [String], invocationSettings: InvocationSettings) throws {
+        
+        let terraformArguments : [String]
+        
+        switch invocationSettings.colorMode {
+            case .none: terraformArguments = [arguments.first!, "-no-color"] + arguments.dropFirst()
+            case .colored: terraformArguments = arguments
+        }
         
         let p = Process()
         p.executableURL = terraformExecutable
-        p.arguments = arguments
+        p.arguments = terraformArguments
         p.currentDirectoryURL = workingDirectoryURL
         p.standardInput = stdin
-        p.standardOutput = stdout
-        p.standardError = stderr
+        
+        class OutputHandler {
+            
+            let fileHandle: FileHandle?
+            
+            private let configuration: Output
+            private let outPipe : Pipe?
+            private var buffer : Data?
+            
+            init(configuration: Output, standardFileHandle: FileHandle) {
+                self.configuration = configuration
+                
+                switch configuration {
+                case .hide:
+                    fileHandle = nil
+                    outPipe = nil
+                    buffer = nil
+                case .passthrough:
+                    fileHandle = standardFileHandle
+                    outPipe = nil
+                    buffer = nil
+                case .collect(_):
+                    outPipe = Pipe()
+                    buffer = Data()
+                    fileHandle = outPipe?.fileHandleForWriting
+                    outPipe?.fileHandleForReading.readabilityHandler = { handle in
+                        self.buffer?.append(handle.availableData)
+                    }
+                }
+            }
+            
+            func finalize() {
+                if case .collect(let callback) = configuration {
+                    fileHandle?.closeFile()
+                    callback(buffer!)
+                }
+            }
+        }
+        
+        let standardOutputHandler = OutputHandler(configuration: invocationSettings.stdout,
+                                                  standardFileHandle: FileHandle.standardOutput)
+        defer { standardOutputHandler.finalize() }
+        
+        let standardErrorHandler = OutputHandler(configuration: invocationSettings.stderr,
+                                                 standardFileHandle: FileHandle.standardError)
+        defer { standardErrorHandler.finalize() }
+        
+        p.standardOutput = standardOutputHandler.fileHandle
+        p.standardError = standardErrorHandler.fileHandle
         
         var env = ProcessInfo.processInfo.environment
         env.updateValue(terraformExecutable.deletingLastPathComponent().path, forKey: "TF_PLUGIN_CACHE_DIR")

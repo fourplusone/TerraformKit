@@ -24,6 +24,17 @@ public struct VersionDescription {
 
 @_implementationOnly import ZIPFoundation
 
+public enum ColorMode {
+    case none
+    case colored
+}
+
+public enum Output {
+    case hide
+    case passthrough
+    case collect( (Data) -> Void )
+}
+
 /// A `Terraform` object is a wrapper around the terraform executable. It can be used to perform common
 /// operations like planning and applying changes, retrieving provider schemas and retrieving versions
 ///
@@ -34,6 +45,22 @@ public class Terraform {
     let workingDirectoryURL : URL
     let usingTemporaryWorkingDirectory: Bool
     let terraformExecutable: URL
+    
+    public struct InvocationSettings {
+        let stderr: Output
+        let stdout: Output
+        let colorMode: ColorMode
+    }
+    
+    static let defaultInvocationSettings = InvocationSettings(
+        stderr: .hide,
+        stdout: .hide,
+        colorMode: .none)
+    
+    static let internalInvocationSettings = InvocationSettings(
+        stderr: .hide,
+        stdout: .hide,
+        colorMode: .none)
     
     public enum TerraformError : Error {
         case unexpectedOutput
@@ -148,8 +175,10 @@ public class Terraform {
         configuration: AnyEncodable? = nil,
         workingDirectoryURL : URL? = nil,
         version : String = Terraform.defaultTerraformVersion,
-        terraformExecutable: URL? = nil
+        terraformExecutable: URL? = nil,
+        colorMode : ColorMode = .none
     ) {
+        
         
         if let tfExecutable = terraformExecutable {
             self.terraformExecutable = tfExecutable
@@ -194,23 +223,27 @@ public class Terraform {
     }
     
     /// Run `terraform init`
-    public func initialize() throws {
-        try invoke(arguments: ["init", workingDirectoryURL.path])
+    public func initialize(invocationSettings: InvocationSettings? = nil) throws {
+        try invoke(arguments: ["init", workingDirectoryURL.path],
+                   invocationSettings: invocationSettings ?? Self.defaultInvocationSettings)
     }
     
     /// Run `terraform plan`
-    public func plan() throws -> Plan {
+    public func plan(invocationSettings: InvocationSettings? = nil) throws -> Plan {
         try withTemporaryFile { (planFile) -> Plan in
-            try invoke(arguments: ["plan", workingDirectoryURL.path, "-out", planFile.path])
+            try invoke(arguments: ["plan", "-out", planFile.path],
+            invocationSettings: invocationSettings ?? Self.defaultInvocationSettings)
             
-            let outPipe = Pipe()
             var buffer = Data()
-            outPipe.fileHandleForReading.readabilityHandler = { handle in
-                buffer.append(handle.availableData)
-            }
             
-            try invoke(arguments: ["show", "-json", planFile.path], stdout:outPipe)
-            outPipe.fileHandleForReading.closeFile()
+            try invoke(arguments: ["show", "-json", planFile.path], invocationSettings:
+                InvocationSettings(
+                stderr: .passthrough,
+                stdout: .collect { (data) in
+                    buffer = data
+                },
+                colorMode:.none)
+            )
             
             let decoder = TerraformDecoder()
             
@@ -221,15 +254,15 @@ public class Terraform {
         }
     }
     
-    public func state() throws -> State {
-        let outPipe = Pipe()
+    public func state(invocationSettings: InvocationSettings? = nil) throws -> State {
         var buffer = Data()
-        outPipe.fileHandleForReading.readabilityHandler = { handle in
-            buffer.append(handle.availableData)
-        }
-        
-        try invoke(arguments: ["show", "-json"], stdout:outPipe)
-        outPipe.fileHandleForReading.closeFile()
+        try invoke(arguments: ["show", "-json"],
+                   invocationSettings: InvocationSettings(
+                    stderr: .passthrough,
+                    stdout: .collect { (data) in
+                        buffer = data
+                    },
+                    colorMode:.none))
         
         let decoder = TerraformDecoder()
         return try decoder.decode(State.self, from: buffer)
@@ -237,27 +270,32 @@ public class Terraform {
     
     /// Run `terraform apply`
     /// - Parameter plan: The plan to execute
-    public func apply(plan: Plan) throws {
-        try invoke(arguments: ["apply", "-auto-approve", "-input=false" , workingDirectoryURL.path])
+    public func apply(plan: Plan, invocationSettings: InvocationSettings? = nil) throws {
+        try withTemporaryFile { (planFile) -> () in
+            try plan.source.write(to: planFile.url)
+            try invoke(arguments: ["apply", "-auto-approve", "-input=false" , planFile.path],
+            invocationSettings: invocationSettings ?? Self.defaultInvocationSettings)
+        }
     }
     
     /// Run `terraform destroy`
-    public func destroy() throws {
-        try invoke(arguments: ["destroy", workingDirectoryURL.path])
+    public func destroy(invocationSettings: InvocationSettings? = nil) throws {
+        try invoke(arguments: ["destroy", "-auto-approve", workingDirectoryURL.path],
+                   invocationSettings: invocationSettings ?? Self.defaultInvocationSettings)
     }
     
     /// Fetch the current provider schema
     /// - Returns: The schema description
     public func schema() throws -> SchemaDescription {
-        let outPipe = Pipe()
         var buffer = Data()
-        outPipe.fileHandleForReading.readabilityHandler = { handle in
-            buffer.append(handle.availableData)
-        }
-        
-        try invoke(arguments: ["providers", "schema", "-json"], stdout:outPipe)
-        outPipe.fileHandleForReading.closeFile()
-        
+        try invoke(arguments: ["providers", "schema", "-json"], invocationSettings: InvocationSettings(
+            stderr: .passthrough,
+            stdout: .collect { (data) in
+                buffer = data
+            },
+            colorMode:.none)
+        )
+
         let decoder = TerraformDecoder()
         
         return try! decoder.decode(SchemaDescription.self, from:buffer)
@@ -266,14 +304,14 @@ public class Terraform {
     /// Determine the currenly used version of terraform and the versions of all installed providers
     /// - Returns: The current version of terraform and all configured providers
     public func version() throws -> VersionDescription {
-        let outPipe = Pipe()
         var buffer = Data()
-        outPipe.fileHandleForReading.readabilityHandler = { handle in
-            buffer.append(handle.availableData)
-        }
         
-        try invoke(arguments: ["version"], stdout:outPipe)
-        outPipe.fileHandleForReading.closeFile()
+        try invoke(arguments: ["version"], invocationSettings: InvocationSettings(
+            stderr: .passthrough,
+            stdout: .collect { (data) in
+                buffer = data
+            },
+        colorMode:.none))
         
         let output = String(data: buffer, encoding: .utf8)!
         
