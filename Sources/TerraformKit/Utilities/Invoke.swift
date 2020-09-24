@@ -545,7 +545,7 @@ extension Terraform {
         p.executableURL = terraformExecutable
         p.arguments = terraformArguments
         p.currentDirectoryURL = workingDirectoryURL
-        p.standardInput = stdin
+        p.standardInput = FileHandle.standardInput
         
         class OutputHandler {
             
