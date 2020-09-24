@@ -29,9 +29,19 @@ public enum ColorMode {
     case colored
 }
 
+
+/// Control how the stdout/stderr output of terraform is handled
 public enum Output {
-    case hide
+    /// Discard the output
+    case discard
+    
+    /// Forward the output to stdout/stderr
     case passthrough
+    
+    /// Forward the output to stdout/stderr, if the exit code is non-zero
+    case passthroughOnFailure
+    
+    /// Collect the output and invoke the closure once the process has ended.
     case collect( (Data) -> Void )
 }
 
@@ -53,13 +63,13 @@ public class Terraform {
     }
     
     static let defaultInvocationSettings = InvocationSettings(
-        stderr: .hide,
-        stdout: .hide,
+        stderr: .passthroughOnFailure,
+        stdout: .passthroughOnFailure,
         colorMode: .none)
     
     static let internalInvocationSettings = InvocationSettings(
-        stderr: .hide,
-        stdout: .hide,
+        stderr: .discard,
+        stdout: .discard,
         colorMode: .none)
     
     public enum TerraformError : Error {
@@ -206,6 +216,7 @@ public class Terraform {
             
             if let configuration = configuration {
                 let encoder = JSONEncoder()
+                encoder.outputFormatting = .prettyPrinted
                 let encoded = try encoder.encode(configuration)
                 try encoded.write(to: self.workingDirectoryURL.appendingPathComponent("main.tf.json"))
             }
@@ -224,19 +235,19 @@ public class Terraform {
     
     /// Run `terraform init`
     public func initialize(invocationSettings: InvocationSettings? = nil) throws {
-        try invoke(arguments: ["init", workingDirectoryURL.path],
+        try invoke("init", arguments: [workingDirectoryURL.path],
                    invocationSettings: invocationSettings ?? Self.defaultInvocationSettings)
     }
     
     /// Run `terraform plan`
     public func plan(invocationSettings: InvocationSettings? = nil) throws -> Plan {
         try withTemporaryFile { (planFile) -> Plan in
-            try invoke(arguments: ["plan", "-out", planFile.path],
+            try invoke("plan", arguments: ["-out", planFile.path],
             invocationSettings: invocationSettings ?? Self.defaultInvocationSettings)
             
             var buffer = Data()
             
-            try invoke(arguments: ["show", "-json", planFile.path], invocationSettings:
+            try invoke("show", arguments: ["-json", planFile.path], invocationSettings:
                 InvocationSettings(
                 stderr: .passthrough,
                 stdout: .collect { (data) in
@@ -254,9 +265,12 @@ public class Terraform {
         }
     }
     
-    public func state(invocationSettings: InvocationSettings? = nil) throws -> State {
+    /// Retrieve the current state
+    /// - Throws:
+    /// - Returns: A  `State` Object
+    public func state() throws -> State {
         var buffer = Data()
-        try invoke(arguments: ["show", "-json"],
+        try invoke("show", arguments: ["-json"],
                    invocationSettings: InvocationSettings(
                     stderr: .passthrough,
                     stdout: .collect { (data) in
@@ -273,14 +287,14 @@ public class Terraform {
     public func apply(plan: Plan, invocationSettings: InvocationSettings? = nil) throws {
         try withTemporaryFile { (planFile) -> () in
             try plan.source.write(to: planFile.url)
-            try invoke(arguments: ["apply", "-auto-approve", "-input=false" , planFile.path],
+            try invoke("apply", arguments: ["-auto-approve", "-input=false" , planFile.path],
             invocationSettings: invocationSettings ?? Self.defaultInvocationSettings)
         }
     }
     
     /// Run `terraform destroy`
     public func destroy(invocationSettings: InvocationSettings? = nil) throws {
-        try invoke(arguments: ["destroy", "-auto-approve", workingDirectoryURL.path],
+        try invoke("destroy", arguments: ["-auto-approve", workingDirectoryURL.path],
                    invocationSettings: invocationSettings ?? Self.defaultInvocationSettings)
     }
     
@@ -288,7 +302,7 @@ public class Terraform {
     /// - Returns: The schema description
     public func schema() throws -> SchemaDescription {
         var buffer = Data()
-        try invoke(arguments: ["providers", "schema", "-json"], invocationSettings: InvocationSettings(
+        try invoke(command:["providers", "schema"], arguments: ["-json"], invocationSettings: InvocationSettings(
             stderr: .passthrough,
             stdout: .collect { (data) in
                 buffer = data
@@ -306,7 +320,7 @@ public class Terraform {
     public func version() throws -> VersionDescription {
         var buffer = Data()
         
-        try invoke(arguments: ["version"], invocationSettings: InvocationSettings(
+        try invoke("version", arguments: [], invocationSettings: InvocationSettings(
             stderr: .passthrough,
             stdout: .collect { (data) in
                 buffer = data

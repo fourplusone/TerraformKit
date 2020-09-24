@@ -520,13 +520,25 @@ func runProcessAndWaitForTermination(_ process: Process) throws -> Int32 {
 
 
 extension Terraform {
-    func invoke(arguments: [String], invocationSettings: InvocationSettings) throws {
+    
+    func invoke(_ command: String, arguments: [String],
+                invocationSettings: InvocationSettings) throws {
+        
+        return try invoke(command: [command],
+                          arguments: arguments,
+                          invocationSettings: invocationSettings)
+    }
+    
+    func invoke(command:[String],
+                arguments: [String],
+                invocationSettings: InvocationSettings) throws {
         
         let terraformArguments : [String]
         
         switch invocationSettings.colorMode {
-            case .none: terraformArguments = [arguments.first!, "-no-color"] + arguments.dropFirst()
-            case .colored: terraformArguments = arguments
+            case .none:
+                terraformArguments = command + ["-no-color"] + arguments
+            case .colored: terraformArguments = command + arguments
         }
         
         let p = Process()
@@ -537,17 +549,19 @@ extension Terraform {
         
         class OutputHandler {
             
-            let fileHandle: FileHandle?
+            let fileHandle: Any?
             
             private let configuration: Output
             private let outPipe : Pipe?
             private var buffer : Data?
+            private var standardFileHandle: FileHandle
             
             init(configuration: Output, standardFileHandle: FileHandle) {
                 self.configuration = configuration
+                self.standardFileHandle = standardFileHandle
                 
                 switch configuration {
-                case .hide:
+                case .discard:
                     fileHandle = nil
                     outPipe = nil
                     buffer = nil
@@ -555,31 +569,43 @@ extension Terraform {
                     fileHandle = standardFileHandle
                     outPipe = nil
                     buffer = nil
+                case .passthroughOnFailure: fallthrough
                 case .collect(_):
                     outPipe = Pipe()
                     buffer = Data()
-                    fileHandle = outPipe?.fileHandleForWriting
+                    fileHandle = outPipe as Any
                     outPipe?.fileHandleForReading.readabilityHandler = { handle in
                         self.buffer?.append(handle.availableData)
                     }
                 }
             }
             
-            func finalize() {
-                if case .collect(let callback) = configuration {
-                    fileHandle?.closeFile()
+            func finalize(successful: Bool) {
+                outPipe?.fileHandleForReading.closeFile()
+                
+                switch configuration {
+                case .discard: break
+                case .passthrough: break
+                case .passthroughOnFailure:
+                    if !successful {
+                        standardFileHandle.write(buffer!)
+                    }
+                    
+                case .collect(let callback):
                     callback(buffer!)
                 }
             }
         }
         
+        var exitCode : Int32 = -1
+        
         let standardOutputHandler = OutputHandler(configuration: invocationSettings.stdout,
                                                   standardFileHandle: FileHandle.standardOutput)
-        defer { standardOutputHandler.finalize() }
+        defer { standardOutputHandler.finalize(successful: exitCode == 0) }
         
         let standardErrorHandler = OutputHandler(configuration: invocationSettings.stderr,
                                                  standardFileHandle: FileHandle.standardError)
-        defer { standardErrorHandler.finalize() }
+        defer { standardErrorHandler.finalize(successful: exitCode == 0) }
         
         p.standardOutput = standardOutputHandler.fileHandle
         p.standardError = standardErrorHandler.fileHandle
@@ -588,6 +614,6 @@ extension Terraform {
         env.updateValue(terraformExecutable.deletingLastPathComponent().path, forKey: "TF_PLUGIN_CACHE_DIR")
         p.environment = env
         
-        try runProcessAndWaitForTermination(p)
+        exitCode = try runProcessAndWaitForTermination(p)
     }
 }
