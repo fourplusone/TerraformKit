@@ -240,17 +240,26 @@ public class Terraform {
     }
     
     /// Run `terraform plan`
-    public func plan(invocationSettings: InvocationSettings? = nil) throws -> Plan {
+    public func plan(destroy: Bool = false,
+                     invocationSettings: InvocationSettings? = nil
+    ) throws -> Plan {
+        
         try withTemporaryFile { (planFile) -> Plan in
-            try invoke("plan", arguments: ["-out", planFile.path],
-            invocationSettings: invocationSettings ?? Self.defaultInvocationSettings)
+            
+            var arguments = ["-out", planFile.path]
+            if destroy {
+                arguments.append("-destroy")
+            }
+            
+            try invoke("plan", arguments: arguments,
+                       invocationSettings: invocationSettings ?? Self.defaultInvocationSettings)
             
             var buffer = Data()
             
             try invoke("show", arguments: ["-json", planFile.path], invocationSettings:
-                InvocationSettings(
-                stderr: .passthrough,
-                stdout: .collect { (data) in
+                        InvocationSettings(
+                            stderr: .passthrough,
+                            stdout: .collect { (data) in
                     buffer = data
                 },
                 colorMode:.none)

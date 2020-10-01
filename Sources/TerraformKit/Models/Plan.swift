@@ -143,7 +143,7 @@ public struct Plan : Decodable {
 
             /// `schemaVersion` is the schema version number indicated by the
             /// provider for the type-specific arguments described in "expressions".
-            public let schema_version: Int64
+            public let schemaVersion: Int64
 
             /// `countExpression` and `forEachExpression` describe the expressions
             /// given for the corresponding meta-arguments in the resource

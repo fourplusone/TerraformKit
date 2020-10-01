@@ -54,7 +54,7 @@ public struct Module : Decodable {
         
         public let schemaVersion : Int64
         
-        public let values : [String: AnyDecodable]
+        public let values : [String: AnyDecodable]?
     }
 
 }
