@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Terraform Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0" />
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/Terraform" class="dashAnchor"></a>
+    <a title="Terraform Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p>
+          <a href="../index.html">TerraformKit</a>
+          <span class="no-mobile"> (51% documented)</span>
+        </p>
+    
+        <p class="header-right">
+          <a href="https://github.com/fourplusone/TerraformKit">
+            <img src="../img/gh.png"/>
+            <span class="no-mobile">View on GitHub</span>
+          </a>
+        </p>
+    
+      </div>
+    </header>
+    <div id="breadcrumbs-container">
+      <div class="content-wrapper">
+        <p id="breadcrumbs">
+          <span class="no-mobile">
+            <a href="../index.html"> Reference</a>
+            <img id="carat" src="../img/carat.png" />
+          </span>
+          Terraform Class Reference
+        </p>
+      </div>
+    </div>
+    <div class="wrapper">
+      <div class="article-wrapper">
+        <article class="main-content">
+          <section>
+            <section class="section">
+              <h1>Terraform</h1>
+                <div class="declaration">
+                  <div class="language">
+                    
+                    <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Terraform</span></code></pre>
+
+                  </div>
+                </div>
+              <p>A <code>Terraform</code> object is a wrapper around the terraform executable. It can be used to perform common
+operations like planning and applying changes, retrieving provider schemas and retrieving versions</p>
+
+<p>This class is the only object to be instanciated directly by the user.</p>
+
+            </section>
+            <section class="section task-group-section">
+              <div class="task-group">
+                <ul>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit0A0C07defaultA7VersionSSvpZ"></a>
+                      <a name="//apple_ref/swift/Variable/defaultTerraformVersion" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit0A0C07defaultA7VersionSSvpZ">defaultTerraformVersion</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Undocumented</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultTerraformVersion</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit0A0C18InvocationSettingsV"></a>
+                      <a name="//apple_ref/swift/Struct/InvocationSettings" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit0A0C18InvocationSettingsV">InvocationSettings</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Undocumented</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">InvocationSettings</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit0A0C0A5ErrorO"></a>
+                      <a name="//apple_ref/swift/Enum/TerraformError" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit0A0C0A5ErrorO">TerraformError</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Undocumented</p>
+
+                          <a href="../Classes/Terraform/TerraformError.html" class="slightly-smaller">See more</a>
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TerraformError</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit0A0C13configuration19workingDirectoryURL7version19terraformExecutable9colorModeACSgAA12AnyEncodableVSg_10Foundation0F0VSgSSApA05ColorK0Otcfc"></a>
+                      <a name="//apple_ref/swift/Method/init(configuration:workingDirectoryURL:version:terraformExecutable:colorMode:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit0A0C13configuration19workingDirectoryURL7version19terraformExecutable9colorModeACSgAA12AnyEncodableVSg_10Foundation0F0VSgSSApA05ColorK0Otcfc">init(configuration:<wbr>workingDirectoryURL:<wbr>version:<wbr>terraformExecutable:<wbr>colorMode:<wbr>)</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Configure a new Terraform environment. Terraform will be downloaded if necessary.</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span>
+    <span class="nv">configuration</span><span class="p">:</span> <span class="kt"><a href="../Structs/AnyEncodable.html">AnyEncodable</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">workingDirectoryURL</span> <span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">version</span> <span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="kt">Terraform</span><span class="o">.</span><span class="n"><a href="../Classes/Terraform.html#/s:12TerraformKit0A0C07defaultA7VersionSSvpZ">defaultTerraformVersion</a></span><span class="p">,</span>
+    <span class="nv">terraformExecutable</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">colorMode</span> <span class="p">:</span> <span class="kt"><a href="../Enums/ColorMode.html">ColorMode</a></span> <span class="o">=</span> <span class="o">.</span><span class="k">none</span>
+<span class="p">)</span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Parameters</h4>
+                          <table class="graybox">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>configuration</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>An Encodable to be used as Terraform configuration. This object will be
+encoded using the JSON decoder and saved to a file called main.tf.json</p>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>workingDirectoryURL</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>URL of Terraforms working directory. If left empty, a temporary
+directory will be created</p>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>version</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The version of Terraform to be used</p>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit0A0C7cleanupyyF"></a>
+                      <a name="//apple_ref/swift/Method/cleanup()" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit0A0C7cleanupyyF">cleanup()</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Remove the temporary working directory of terraform. Calling this function is not allowed, if a
+working directory was specified in the initializer</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">cleanup</span><span class="p">()</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit0A0C10initialize18invocationSettingsyAC010InvocationE0VSg_tKF"></a>
+                      <a name="//apple_ref/swift/Method/initialize(invocationSettings:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit0A0C10initialize18invocationSettingsyAC010InvocationE0VSg_tKF">initialize(invocationSettings:<wbr>)</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Run <code>terraform init</code></p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">initialize</span><span class="p">(</span><span class="nv">invocationSettings</span><span class="p">:</span> <span class="kt"><a href="../Classes/Terraform.html#/s:12TerraformKit0A0C18InvocationSettingsV">InvocationSettings</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit0A0C4plan7destroy18invocationSettingsAA4PlanVSb_AC010InvocationF0VSgtKF"></a>
+                      <a name="//apple_ref/swift/Method/plan(destroy:invocationSettings:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit0A0C4plan7destroy18invocationSettingsAA4PlanVSb_AC010InvocationF0VSgtKF">plan(destroy:<wbr>invocationSettings:<wbr>)</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Run <code>terraform plan</code></p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">plan</span><span class="p">(</span><span class="nv">destroy</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span><span class="p">,</span>
+                 <span class="nv">invocationSettings</span><span class="p">:</span> <span class="kt"><a href="../Classes/Terraform.html#/s:12TerraformKit0A0C18InvocationSettingsV">InvocationSettings</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/Plan.html">Plan</a></span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit0A0C5stateAA5StateVyKF"></a>
+                      <a name="//apple_ref/swift/Method/state()" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit0A0C5stateAA5StateVyKF">state()</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Retrieve the current state</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    
+</div>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">state</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/State.html">State</a></span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Return Value</h4>
+                          <p>A  <code><a href="../Structs/State.html">State</a></code> Object</p>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit0A0C5apply4plan18invocationSettingsyAA4PlanV_AC010InvocationF0VSgtKF"></a>
+                      <a name="//apple_ref/swift/Method/apply(plan:invocationSettings:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit0A0C5apply4plan18invocationSettingsyAA4PlanV_AC010InvocationF0VSgtKF">apply(plan:<wbr>invocationSettings:<wbr>)</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Run <code>terraform apply</code></p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">apply</span><span class="p">(</span><span class="nv">plan</span><span class="p">:</span> <span class="kt"><a href="../Structs/Plan.html">Plan</a></span><span class="p">,</span> <span class="nv">invocationSettings</span><span class="p">:</span> <span class="kt"><a href="../Classes/Terraform.html#/s:12TerraformKit0A0C18InvocationSettingsV">InvocationSettings</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Parameters</h4>
+                          <table class="graybox">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <code>
+                                  <em>plan</em>
+                                  </code>
+                                </td>
+                                <td>
+                                  <div>
+                                    <p>The plan to execute</p>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit0A0C7destroy18invocationSettingsyAC010InvocationE0VSg_tKF"></a>
+                      <a name="//apple_ref/swift/Method/destroy(invocationSettings:)" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit0A0C7destroy18invocationSettingsyAC010InvocationE0VSg_tKF">destroy(invocationSettings:<wbr>)</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Run <code>terraform destroy</code></p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">destroy</span><span class="p">(</span><span class="nv">invocationSettings</span><span class="p">:</span> <span class="kt"><a href="../Classes/Terraform.html#/s:12TerraformKit0A0C18InvocationSettingsV">InvocationSettings</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit0A0C6schemaAA17SchemaDescriptionVyKF"></a>
+                      <a name="//apple_ref/swift/Method/schema()" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit0A0C6schemaAA17SchemaDescriptionVyKF">schema()</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Fetch the current provider schema</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">schema</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/SchemaDescription.html">SchemaDescription</a></span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Return Value</h4>
+                          <p>The schema description</p>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit0A0C7versionAA18VersionDescriptionVyKF"></a>
+                      <a name="//apple_ref/swift/Method/version()" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit0A0C7versionAA18VersionDescriptionVyKF">version()</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Determine the currenly used version of terraform and the versions of all installed providers</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">version</span><span class="p">()</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Structs/VersionDescription.html">VersionDescription</a></span></code></pre>
+
+                          </div>
+                        </div>
+                        <div>
+                          <h4>Return Value</h4>
+                          <p>The current version of terraform and all configured providers</p>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </section>
+          </section>
+        </article>
+      </div>
+      <div class="nav-wrapper">
+        <nav class="nav-bottom">
+          <ul class="nav-groups">
+            <li class="nav-group-name">
+              <a href="../Classes.html">Classes</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Classes/Terraform.html">Terraform</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/Terraform.html#/s:12TerraformKit0A0C18InvocationSettingsV">– InvocationSettings</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Classes/Terraform/TerraformError.html">– TerraformError</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="../Enums.html">Enumerations</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Enums/ColorMode.html">ColorMode</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/Mode.html">Mode</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/Output.html">Output</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Enums/Type.html">Type</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="../Extensions.html">Extensions</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Extensions/Encodable.html">Encodable</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-group-name">
+              <a href="../Structs.html">Structures</a>
+              <ul class="nav-group-tasks">
+                <li class="nav-group-task">
+                  <a href="../Structs/AnyDecodable.html">AnyDecodable</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/AnyEncodable.html">AnyEncodable</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/Module.html">Module</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/Module/ChildModule.html">– ChildModule</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/Module/Resource.html">– Resource</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/Plan.html">Plan</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/Plan/Configuration.html">– Configuration</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/Plan/Variable.html">– Variable</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/Plan/Change.html">– Change</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/Plan/ResourceChange.html">– ResourceChange</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/Plan/OutputChange.html">– OutputChange</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/Schema.html">Schema</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/Schema/Block.html">– Block</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/SchemaDescription.html">SchemaDescription</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/SchemaDescription/ProviderSchema.html">– ProviderSchema</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/State.html">State</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/Values.html">Values</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/VersionDescription.html">VersionDescription</a>
+                </li>
+                <li class="nav-group-task">
+                  <a href="../Structs/VersionDescription/ProviderVersionDescription.html">– ProviderVersionDescription</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-wrapper">
+        <section id="footer">
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">Matthias Bartelmeß</a>. All rights reserved. (Last updated: 2020-10-02)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </div>
+    </div>
+  </body>
+</div>
+</html>
