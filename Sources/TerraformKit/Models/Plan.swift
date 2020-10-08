@@ -98,7 +98,20 @@ public struct Plan : Decodable {
             
             public struct Property : Decodable {
                 public let expression: Expression
-                public let sesitive: Bool
+                public let sensitive: Bool
+                
+                private enum CodingKeys : String, CodingKey {
+                    case expression
+                    case sensitive
+                }
+                
+                public init(from decoder: Decoder) throws {
+                    let container = try decoder.container(keyedBy: CodingKeys.self)
+                    expression = try container.decode(Expression.self,
+                                                      forKey:.expression)
+                    sensitive = try container.decodeIfPresent(Bool.self,
+                                                              forKey: .sensitive) ?? false
+                }
             }
             
             /// `outputs` describes the output value configurations in the module.
@@ -280,17 +293,14 @@ public struct Plan : Decodable {
         public let change: Change
     }
     
-    public let outputChanges : [String: OutputChange]
-    public struct OutputChange : Decodable{
-        /// "change" describes the change that will be made to the indicated output
-        /// value, using the same representation as for resource changes except
-        /// that the only valid actions values are:
-        ///   ["create"]
-        ///   ["update"]
-        ///   ["delete"]
-        /// In the Terraform CLI 0.12.0 release, Terraform is not yet fully able to
-        /// track changes to output values, so the actions indicated may not be
-        /// fully accurate, but the "after" value will always be correct.
-        public let change: Change
-    }
+    /// `Change` describes the change that will be made to the indicated output
+    /// value, using the same representation as for resource changes except
+    /// that the only valid actions values are:
+    ///   ["create"]
+    ///   ["update"]
+    ///   ["delete"]
+    /// In the Terraform CLI 0.12.0 release, Terraform is not yet fully able to
+    /// track changes to output values, so the actions indicated may not be
+    /// fully accurate, but the "after" value will always be correct.
+    public let outputChanges : [String: Change]
 }
