@@ -17,7 +17,7 @@
       <div class="content-wrapper">
         <p>
           <a href="../index.html">TerraformKit</a>
-          <span class="no-mobile"> (51% documented)</span>
+          <span class="no-mobile"> (52% documented)</span>
         </p>
     
         <p class="header-right">
@@ -346,9 +346,9 @@ configuration are included in this list.</p>
                   <li class="item">
                     <div>
                       <code>
-                      <a name="/s:12TerraformKit4PlanV13outputChangesSDySSAC12OutputChangeVGvp"></a>
+                      <a name="/s:12TerraformKit4PlanV13outputChangesSDySSAC6ChangeVGvp"></a>
                       <a name="//apple_ref/swift/Property/outputChanges" class="dashAnchor"></a>
-                      <a class="token" href="#/s:12TerraformKit4PlanV13outputChangesSDySSAC12OutputChangeVGvp">outputChanges</a>
+                      <a class="token" href="#/s:12TerraformKit4PlanV13outputChangesSDySSAC6ChangeVGvp">outputChanges</a>
                       </code>
                     </div>
                     <div class="height-container">
@@ -356,42 +356,22 @@ configuration are included in this list.</p>
                       <section class="section">
                         <div class="pointer"></div>
                         <div class="abstract">
-                          <p>Undocumented</p>
+                          <p><code><a href="../Structs/Plan/Change.html">Change</a></code> describes the change that will be made to the indicated output
+value, using the same representation as for resource changes except
+that the only valid actions values are:
+  [&ldquo;create&rdquo;]
+  [&ldquo;update&rdquo;]
+  [&ldquo;delete&rdquo;]
+In the Terraform CLI 0.12.0 release, Terraform is not yet fully able to
+track changes to output values, so the actions indicated may not be
+fully accurate, but the &ldquo;after&rdquo; value will always be correct.</p>
 
                         </div>
                         <div class="declaration">
                           <h4>Declaration</h4>
                           <div class="language">
                             <p class="aside-title">Swift</p>
-                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">outputChanges</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt"><a href="../Structs/Plan/OutputChange.html">OutputChange</a></span><span class="p">]</span></code></pre>
-
-                          </div>
-                        </div>
-                      </section>
-                    </div>
-                  </li>
-                  <li class="item">
-                    <div>
-                      <code>
-                      <a name="/s:12TerraformKit4PlanV12OutputChangeV"></a>
-                      <a name="//apple_ref/swift/Struct/OutputChange" class="dashAnchor"></a>
-                      <a class="token" href="#/s:12TerraformKit4PlanV12OutputChangeV">OutputChange</a>
-                      </code>
-                    </div>
-                    <div class="height-container">
-                      <div class="pointer-container"></div>
-                      <section class="section">
-                        <div class="pointer"></div>
-                        <div class="abstract">
-                          <p>Undocumented</p>
-
-                          <a href="../Structs/Plan/OutputChange.html" class="slightly-smaller">See more</a>
-                        </div>
-                        <div class="declaration">
-                          <h4>Declaration</h4>
-                          <div class="language">
-                            <p class="aside-title">Swift</p>
-                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">OutputChange</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">outputChanges</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt"><a href="../Structs/Plan/Change.html">Change</a></span><span class="p">]</span></code></pre>
 
                           </div>
                         </div>
@@ -480,9 +460,6 @@ configuration are included in this list.</p>
                   <a href="../Structs/Plan/ResourceChange.html">– ResourceChange</a>
                 </li>
                 <li class="nav-group-task">
-                  <a href="../Structs/Plan/OutputChange.html">– OutputChange</a>
-                </li>
-                <li class="nav-group-task">
                   <a href="../Structs/Schema.html">Schema</a>
                 </li>
                 <li class="nav-group-task">
@@ -513,7 +490,7 @@ configuration are included in this list.</p>
       </div>
       <div class="footer-wrapper">
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">Matthias Bartelmeß</a>. All rights reserved. (Last updated: 2020-10-02)</p>
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">Matthias Bartelmeß</a>. All rights reserved. (Last updated: 2020-10-08)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </div>

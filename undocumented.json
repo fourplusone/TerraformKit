@@ -59,176 +59,162 @@
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
       "line": 101,
-      "symbol": "Plan.Configuration.ModuleConfiguration.Property.sesitive",
+      "symbol": "Plan.Configuration.ModuleConfiguration.Property.sensitive",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 113,
+      "line": 126,
       "symbol": "Plan.Configuration.ResourceConfiguration",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 115,
+      "line": 128,
       "symbol": "Plan.Configuration.ResourceConfiguration.address",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 121,
+      "line": 134,
       "symbol": "Plan.Configuration.ResourceConfiguration.type",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 122,
+      "line": 135,
       "symbol": "Plan.Configuration.ResourceConfiguration.name",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 130,
+      "line": 143,
       "symbol": "Plan.Configuration.ResourceConfiguration.Provisioner",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 131,
+      "line": 144,
       "symbol": "Plan.Configuration.ResourceConfiguration.Provisioner.type",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 153,
+      "line": 166,
       "symbol": "Plan.Configuration.ResourceConfiguration.forEachExpression",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 163,
+      "line": 176,
       "symbol": "Plan.Configuration.ModuleCall",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 181,
+      "line": 194,
       "symbol": "Plan.Configuration.ModuleCall.forEachExpression",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 205,
+      "line": 218,
       "symbol": "Plan.Variable",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 206,
+      "line": 219,
       "symbol": "Plan.Variable.value",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 217,
+      "line": 230,
       "symbol": "Plan.Change.Action",
       "symbol_kind": "source.lang.swift.decl.enum",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 218,
+      "line": 231,
       "symbol": "Plan.Change.Action.noOp",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 219,
+      "line": 232,
       "symbol": "Plan.Change.Action.create",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 220,
+      "line": 233,
       "symbol": "Plan.Change.Action.read",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 221,
+      "line": 234,
       "symbol": "Plan.Change.Action.update",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 222,
+      "line": 235,
       "symbol": "Plan.Change.Action.delete",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 247,
+      "line": 260,
       "symbol": "Plan.Change.after",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 250,
+      "line": 263,
       "symbol": "Plan.ResourceChange",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 260,
+      "line": 273,
       "symbol": "Plan.ResourceChange.mode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 261,
+      "line": 274,
       "symbol": "Plan.ResourceChange.type",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 262,
+      "line": 275,
       "symbol": "Plan.ResourceChange.name",
       "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 283,
-      "symbol": "Plan.outputChanges",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 284,
-      "symbol": "Plan.OutputChange",
-      "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
