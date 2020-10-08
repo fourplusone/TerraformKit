@@ -8,7 +8,10 @@
 import Foundation
 
 public enum Mode : String, Decodable {
+    /// The  resource is managed by terraform
     case managed
+    
+    /// The resource is a data source
     case data
 }
 

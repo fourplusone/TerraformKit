@@ -251,12 +251,14 @@ public struct Plan : Decodable {
         /// combinations that might be added in future.
         public let actions: [Action]
 
-        /// "before" and "after" are representations of the object value both before
+        /// `before` and `after` are representations of the object value both before
         /// and after the action. For ["create"] and ["delete"] actions, either
         /// "before" or "after" is unset (respectively). For ["no-op"], the before and
-        /// after values are identical. The "after" value will be incomplete if there
+        /// after values are identical. The `after` value will be incomplete if there
         /// are values within it that won't be known until after apply.
         public let before: Values?
+        
+        /// see `before`
         public let after: Values?
     }
     
