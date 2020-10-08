@@ -184,35 +184,28 @@
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 260,
-      "symbol": "Plan.Change.after",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 263,
+      "line": 265,
       "symbol": "Plan.ResourceChange",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 273,
+      "line": 275,
       "symbol": "Plan.ResourceChange.mode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 274,
+      "line": 276,
       "symbol": "Plan.ResourceChange.type",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Plan.swift",
-      "line": 275,
+      "line": 277,
       "symbol": "Plan.ResourceChange.name",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -401,105 +394,91 @@
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 11,
-      "symbol": "Mode.managed",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 12,
-      "symbol": "Mode.data",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 15,
+      "line": 18,
       "symbol": "Module",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 16,
+      "line": 19,
       "symbol": "Module.resources",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 18,
+      "line": 21,
       "symbol": "Module.childModules",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 22,
+      "line": 25,
       "symbol": "Module.ChildModule",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 29,
+      "line": 32,
       "symbol": "Module.ChildModule.resources",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 31,
+      "line": 34,
       "symbol": "Module.ChildModule.childModules",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 34,
+      "line": 37,
       "symbol": "Module.Resource",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 43,
+      "line": 46,
       "symbol": "Module.Resource.mode",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 44,
+      "line": 47,
       "symbol": "Module.Resource.type",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 45,
+      "line": 48,
       "symbol": "Module.Resource.name",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 53,
+      "line": 56,
       "symbol": "Module.Resource.providerName",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 55,
+      "line": 58,
       "symbol": "Module.Resource.schemaVersion",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
-      "line": 57,
+      "line": 60,
       "symbol": "Module.Resource.values",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
