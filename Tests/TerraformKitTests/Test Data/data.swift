@@ -7,3 +7,6 @@ let emptyPlan = #"""
 let outputPlan = #"""
 {"format_version":"0.1","terraform_version":"0.13.4","planned_values":{"outputs":{"anOutput":{"sensitive":false,"value":"Hello World"}},"root_module":{}},"output_changes":{"anOutput":{"actions":["create"],"before":null,"after":"Hello World","after_unknown":false}},"prior_state":{"format_version":"0.1","terraform_version":"0.13.4","values":{"outputs":{"anOutput":{"sensitive":false,"value":"Hello World"}},"root_module":{}}},"configuration":{"root_module":{"outputs":{"anOutput":{"expression":{"constant_value":"Hello World"}}}}}}
 """#.data(using:.utf8)!
+let variablesPlan = #"""
+{"format_version":"0.1","terraform_version":"0.13.4","variables":{"anInput":{"value":"foo"}},"planned_values":{"outputs":{"anOutput":{"sensitive":false,"value":"foo"}},"root_module":{}},"output_changes":{"anOutput":{"actions":["create"],"before":null,"after":"foo","after_unknown":false}},"prior_state":{"format_version":"0.1","terraform_version":"0.13.4","values":{"outputs":{"anOutput":{"sensitive":false,"value":"foo"}},"root_module":{}}},"configuration":{"root_module":{"outputs":{"anOutput":{"expression":{"references":["var.anInput"]}}},"variables":{"anInput":{}}}}}
+"""#.data(using:.utf8)!
