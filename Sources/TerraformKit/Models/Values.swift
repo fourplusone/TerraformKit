@@ -84,7 +84,7 @@ public struct Values : Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         rootModule = try container.decodeIfPresent(Module.self, forKey: .rootModule)
         outputs = try container.decodeIfPresent(Dictionary<String, AnyDecodable>.self,
-                                                forKey: .rootModule) ?? [:]
+                                                forKey: .outputs) ?? [:]
         
     }
 }
