@@ -491,6 +491,20 @@
       "warning": "undocumented"
     },
     {
+      "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
+      "line": 70,
+      "symbol": "Values.Output.value",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
+      "line": 71,
+      "symbol": "Values.Output.sensitive",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Terraform.swift",
       "line": 27,
       "symbol": "ColorMode",

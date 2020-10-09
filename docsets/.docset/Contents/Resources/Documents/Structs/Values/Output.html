@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TerraformError Enumeration Reference</title>
+    <title>Output Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset='utf-8'>
@@ -11,8 +11,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/TerraformError" class="dashAnchor"></a>
-    <a title="TerraformError Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Struct/Output" class="dashAnchor"></a>
+    <a title="Output Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p>
@@ -36,7 +36,7 @@
             <a href="../../index.html"> Reference</a>
             <img id="carat" src="../../img/carat.png" />
           </span>
-          TerraformError Enumeration Reference
+          Output Structure Reference
         </p>
       </div>
     </div>
@@ -45,11 +45,11 @@
         <article class="main-content">
           <section>
             <section class="section">
-              <h1>TerraformError</h1>
+              <h1>Output</h1>
                 <div class="declaration">
                   <div class="language">
                     
-                    <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">TerraformError</span> <span class="p">:</span> <span class="kt">Error</span></code></pre>
+                    <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Output</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
 
                   </div>
                 </div>
@@ -62,9 +62,9 @@
                   <li class="item">
                     <div>
                       <code>
-                      <a name="/s:12TerraformKit0A0C0A5ErrorO16unexpectedOutputyA2EmF"></a>
-                      <a name="//apple_ref/swift/Element/unexpectedOutput" class="dashAnchor"></a>
-                      <a class="token" href="#/s:12TerraformKit0A0C0A5ErrorO16unexpectedOutputyA2EmF">unexpectedOutput</a>
+                      <a name="/s:12TerraformKit6ValuesV6OutputV5valueAA12AnyDecodableVvp"></a>
+                      <a name="//apple_ref/swift/Property/value" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit6ValuesV6OutputV5valueAA12AnyDecodableVvp">value</a>
                       </code>
                     </div>
                     <div class="height-container">
@@ -79,7 +79,34 @@
                           <h4>Declaration</h4>
                           <div class="language">
                             <p class="aside-title">Swift</p>
-                            <pre class="highlight swift"><code><span class="k">case</span> <span class="n">unexpectedOutput</span></code></pre>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">value</span><span class="p">:</span> <span class="kt"><a href="../../Structs/AnyDecodable.html">AnyDecodable</a></span></code></pre>
+
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </li>
+                  <li class="item">
+                    <div>
+                      <code>
+                      <a name="/s:12TerraformKit6ValuesV6OutputV9sensitiveSbvp"></a>
+                      <a name="//apple_ref/swift/Property/sensitive" class="dashAnchor"></a>
+                      <a class="token" href="#/s:12TerraformKit6ValuesV6OutputV9sensitiveSbvp">sensitive</a>
+                      </code>
+                    </div>
+                    <div class="height-container">
+                      <div class="pointer-container"></div>
+                      <section class="section">
+                        <div class="pointer"></div>
+                        <div class="abstract">
+                          <p>Undocumented</p>
+
+                        </div>
+                        <div class="declaration">
+                          <h4>Declaration</h4>
+                          <div class="language">
+                            <p class="aside-title">Swift</p>
+                            <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">sensitive</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                           </div>
                         </div>
