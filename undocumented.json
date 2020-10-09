@@ -484,6 +484,13 @@
       "warning": "undocumented"
     },
     {
+      "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Models/Values.swift",
+      "line": 69,
+      "symbol": "Values.Output",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
       "file": "/__w/TerraformKit/TerraformKit/Sources/TerraformKit/Terraform.swift",
       "line": 27,
       "symbol": "ColorMode",
