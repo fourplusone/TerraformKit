@@ -181,6 +181,9 @@ public class Terraform {
     ///   - workingDirectoryURL: URL of Terraforms working directory. If left empty, a temporary
     ///   directory will be created
     ///   - version: The version of Terraform to be used
+    ///   - terraformExecutable: URL of the Terraform executable to use. If this value is not present
+    ///   TerraformKit will download a suitable release of Terraform
+    ///   - colorMode: Whether to emit colored output
     public init?(
         configuration: AnyEncodable? = nil,
         workingDirectoryURL : URL? = nil,
