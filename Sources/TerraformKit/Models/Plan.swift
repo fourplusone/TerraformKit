@@ -39,7 +39,7 @@ public struct Plan : Decodable {
             /// objects they care about without attempting to parse the expressions.
             /// Callers should only use string equality checks here, since the syntax may
             /// be extended in future releases.
-            public let references: [String]
+            public let references: [String]?
         }
 
         /// A sub-object of a configuration representation that describes the expressions nested inside a block.
@@ -225,7 +225,7 @@ public struct Plan : Decodable {
     public let resourceChanges: [ResourceChange]
     
     ///A  `change`  describes the change that will be made to the indicated object.
-    public struct Change: Decodable {
+    public struct Change<Values>: Decodable where Values : Decodable {
         
         public enum Action : String, Decodable {
             case noOp = "no-op"
@@ -292,7 +292,7 @@ public struct Plan : Decodable {
         
         /// `change` describes the change that will be made to the indicated
         /// object. The <change-representation> is detailed in a section below.
-        public let change: Change
+        public let change: Change<Values>
     }
     
     /// `Change` describes the change that will be made to the indicated output
@@ -304,5 +304,5 @@ public struct Plan : Decodable {
     /// In the Terraform CLI 0.12.0 release, Terraform is not yet fully able to
     /// track changes to output values, so the actions indicated may not be
     /// fully accurate, but the "after" value will always be correct.
-    public let outputChanges : [String: Change]
+    public let outputChanges : [String: Change<AnyDecodable>]
 }

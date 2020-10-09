@@ -7,14 +7,17 @@ final class DeserializationTests: XCTestCase {
     
     func testPlan() {
         var plan : Plan! = nil
-        XCTAssertNoThrow(plan = try decoder.decode(Plan.self, from: demo_plan))
-        
-        
-        
+        XCTAssertNoThrow(plan = try decoder.decode(Plan.self, from: demoPlan))
         XCTAssert((plan.plannedValues.rootModule?.resources.count)! > 0)
     }
     
+    func testOutputPlan() {
+        var plan : Plan! = nil
+        XCTAssertNoThrow(plan = try decoder.decode(Plan.self, from: outputPlan))
+        XCTAssert(plan.outputChanges.count > 0)
+    }
+    
     func testEmptyPlan() {
-        XCTAssertNoThrow(try decoder.decode(Plan.self, from: empty_plan))
+        XCTAssertNoThrow(try decoder.decode(Plan.self, from: emptyPlan))
     }
 }

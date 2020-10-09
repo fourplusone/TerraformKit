@@ -50,8 +50,8 @@ extension KeyedDecodingContainer {
         try decodeIfPresent(type, forKey: key) ?? .init()
     }
     
-    func decode(_ type: [String: Plan.Change].Type,
-                forKey key: Key) throws -> [String: Plan.Change] {
+    func decode<T>(_ type: [String: Plan.Change<T>].Type,
+                forKey key: Key) throws -> [String: Plan.Change<T>] {
         try decodeIfPresent(type, forKey: key) ?? .init()
     }
 }
