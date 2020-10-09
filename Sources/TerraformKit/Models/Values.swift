@@ -66,10 +66,15 @@ public struct Module : Decodable {
 /// complete) and planned state (which omits values not known until apply).
 public struct Values : Decodable {
     
+    public struct Output : Decodable {
+        public let value : AnyDecodable
+        public let sensitive: Bool
+    }
+    
     /// `outputs` describes the outputs from the root module. Outputs from
     /// descendent modules are not available because they are not retained in all
     /// of the underlying structures we will build this values representation from.
-    public let outputs : Dictionary<String, AnyDecodable>
+    public let outputs : Dictionary<String, Output>
     
     /// `rootModule` describes the resources and child modules in the root module.
     public let rootModule: Module?
@@ -83,7 +88,7 @@ public struct Values : Decodable {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         rootModule = try container.decodeIfPresent(Module.self, forKey: .rootModule)
-        outputs = try container.decodeIfPresent(Dictionary<String, AnyDecodable>.self,
+        outputs = try container.decodeIfPresent(Dictionary<String, Output>.self,
                                                 forKey: .outputs) ?? [:]
         
     }
