@@ -49,7 +49,7 @@
                 <div class="declaration">
                   <div class="language">
                     
-                    <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Change</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                    <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Change</span><span class="o">&lt;</span><span class="kt"><a href="../../Structs/Values.html">Values</a></span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">Decodable</span> <span class="k">where</span> <span class="kt"><a href="../../Structs/Values.html">Values</a></span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
 
                   </div>
                 </div>
@@ -90,9 +90,9 @@
                   <li class="item">
                     <div>
                       <code>
-                      <a name="/s:12TerraformKit4PlanV6ChangeV7actionsSayAE6ActionOGvp"></a>
+                      <a name="/s:12TerraformKit4PlanV6ChangeV7actionsSayAE6ActionOy_x_GGvp"></a>
                       <a name="//apple_ref/swift/Property/actions" class="dashAnchor"></a>
-                      <a class="token" href="#/s:12TerraformKit4PlanV6ChangeV7actionsSayAE6ActionOGvp">actions</a>
+                      <a class="token" href="#/s:12TerraformKit4PlanV6ChangeV7actionsSayAE6ActionOy_x_GGvp">actions</a>
                       </code>
                     </div>
                     <div class="height-container">
@@ -130,9 +130,9 @@ combinations that might be added in future.</p>
                   <li class="item">
                     <div>
                       <code>
-                      <a name="/s:12TerraformKit4PlanV6ChangeV6beforeAA6ValuesVSgvp"></a>
+                      <a name="/s:12TerraformKit4PlanV6ChangeV6beforexSgvp"></a>
                       <a name="//apple_ref/swift/Property/before" class="dashAnchor"></a>
-                      <a class="token" href="#/s:12TerraformKit4PlanV6ChangeV6beforeAA6ValuesVSgvp">before</a>
+                      <a class="token" href="#/s:12TerraformKit4PlanV6ChangeV6beforexSgvp">before</a>
                       </code>
                     </div>
                     <div class="height-container">
@@ -140,10 +140,10 @@ combinations that might be added in future.</p>
                       <section class="section">
                         <div class="pointer"></div>
                         <div class="abstract">
-                          <p><code>before</code> and <code><a href="../../Structs/Plan/Change.html#/s:12TerraformKit4PlanV6ChangeV5afterAA6ValuesVSgvp">after</a></code> are representations of the object value both before
+                          <p><code>before</code> and <code><a href="../../Structs/Plan/Change.html#/s:12TerraformKit4PlanV6ChangeV5afterxSgvp">after</a></code> are representations of the object value both before
 and after the action. For [&ldquo;create&rdquo;] and [&ldquo;delete&rdquo;] actions, either
 &ldquo;before&rdquo; or &ldquo;after&rdquo; is unset (respectively). For [&ldquo;no-op&rdquo;], the before and
-after values are identical. The <code><a href="../../Structs/Plan/Change.html#/s:12TerraformKit4PlanV6ChangeV5afterAA6ValuesVSgvp">after</a></code> value will be incomplete if there
+after values are identical. The <code><a href="../../Structs/Plan/Change.html#/s:12TerraformKit4PlanV6ChangeV5afterxSgvp">after</a></code> value will be incomplete if there
 are values within it that won&rsquo;t be known until after apply.</p>
 
                         </div>
@@ -161,9 +161,9 @@ are values within it that won&rsquo;t be known until after apply.</p>
                   <li class="item">
                     <div>
                       <code>
-                      <a name="/s:12TerraformKit4PlanV6ChangeV5afterAA6ValuesVSgvp"></a>
+                      <a name="/s:12TerraformKit4PlanV6ChangeV5afterxSgvp"></a>
                       <a name="//apple_ref/swift/Property/after" class="dashAnchor"></a>
-                      <a class="token" href="#/s:12TerraformKit4PlanV6ChangeV5afterAA6ValuesVSgvp">after</a>
+                      <a class="token" href="#/s:12TerraformKit4PlanV6ChangeV5afterxSgvp">after</a>
                       </code>
                     </div>
                     <div class="height-container">
@@ -171,7 +171,7 @@ are values within it that won&rsquo;t be known until after apply.</p>
                       <section class="section">
                         <div class="pointer"></div>
                         <div class="abstract">
-                          <p>see <code><a href="../../Structs/Plan/Change.html#/s:12TerraformKit4PlanV6ChangeV6beforeAA6ValuesVSgvp">before</a></code></p>
+                          <p>see <code><a href="../../Structs/Plan/Change.html#/s:12TerraformKit4PlanV6ChangeV6beforexSgvp">before</a></code></p>
 
                         </div>
                         <div class="declaration">
@@ -297,7 +297,7 @@ are values within it that won&rsquo;t be known until after apply.</p>
       </div>
       <div class="footer-wrapper">
         <section id="footer">
-          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">Matthias Bartelmeß</a>. All rights reserved. (Last updated: 2020-10-08)</p>
+          <p>&copy; 2020 <a class="link" href="" target="_blank" rel="external">Matthias Bartelmeß</a>. All rights reserved. (Last updated: 2020-10-09)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </div>
