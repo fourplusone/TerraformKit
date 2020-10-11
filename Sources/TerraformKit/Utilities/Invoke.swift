@@ -1,4 +1,5 @@
 import Foundation
+import Dispatch
 
 #if canImport(Darwin) && os(macOS)
 // This source file is part of the Swift.org open source project
@@ -554,6 +555,7 @@ extension Terraform {
             private let configuration: Output
             private let outPipe : Pipe?
             private var buffer : Data?
+            private var sema : DispatchSemaphore?
             private var standardFileHandle: FileHandle
             
             init(configuration: Output, standardFileHandle: FileHandle) {
@@ -565,17 +567,25 @@ extension Terraform {
                     fileHandle = nil
                     outPipe = nil
                     buffer = nil
+                    sema = nil
                 case .passthrough:
                     fileHandle = standardFileHandle
                     outPipe = nil
                     buffer = nil
+                    sema = nil
                 case .passthroughOnFailure: fallthrough
                 case .collect(_):
                     outPipe = Pipe()
                     buffer = Data()
+                    sema = DispatchSemaphore(value: 0)
                     fileHandle = outPipe as Any
                     outPipe?.fileHandleForReading.readabilityHandler = { handle in
-                        self.buffer?.append(handle.availableData)
+                        let availableData = handle.availableData
+                        if availableData.count == 0 {
+                            self.sema?.signal()
+                        } else {
+                            self.buffer?.append(availableData)
+                        }
                     }
                 }
             }
@@ -587,11 +597,13 @@ extension Terraform {
                 case .discard: break
                 case .passthrough: break
                 case .passthroughOnFailure:
+                    self.sema?.wait()
                     if !successful {
                         standardFileHandle.write(buffer!)
                     }
                     
                 case .collect(let callback):
+                    self.sema?.wait()
                     callback(buffer!)
                 }
             }
